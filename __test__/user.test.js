@@ -11,7 +11,7 @@ const connect = (uri, options) => {
   return new Promise((resolve, reject) => {
     mongoose.connect(uri, options).then((res, err) => {
       if (err) return reject(err);
-      resolve();
+      return resolve();
     });
   });
 };

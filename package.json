@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint . --fix",
     "dev": "nodemon src/server.js",
     "test:coverage": "nyc mocha --require sucrase/register --recursive --exit __test__/*.test.js",
-    "precommit": "npm run lint && npm run test:coverage"
+    "pre-commit": "npm run lint && npm run test:coverage"
   },
   "nyc": {
     "reporter": [
