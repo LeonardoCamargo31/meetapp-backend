@@ -5,7 +5,20 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "test": "nyc mocha --require sucrase/register --recursive --exit __test__/*.test.js"
+    "test:coverage": "nyc mocha --require sucrase/register --recursive --exit __test__/*.test.js",
+    "precommit": "npm run lint && npm run test:coverage"
+  },
+  "nyc": {
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "exclude": [
+      "__test__/**"
+    ],
+    "check-coverage": true,
+    "funcions": 80,
+    "lines": 80
   },
   "keywords": [],
   "author": "",
@@ -23,6 +36,7 @@
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-prettier": "^3.1.1",
+    "husky": "^3.1.0",
     "mocha": "^6.2.0",
     "nodemon": "^2.0.2",
     "nyc": "^15.0.0",
