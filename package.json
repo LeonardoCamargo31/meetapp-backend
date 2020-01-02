@@ -9,6 +9,11 @@
     "test:coverage": "nyc mocha --require sucrase/register --recursive --exit __test__/*.test.js",
     "pre-commit": "npm run lint && npm run test:coverage"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint && test:coverage"
+    }
+  },
   "nyc": {
     "reporter": [
       "text",
