@@ -24,8 +24,9 @@ UserSchema.pre('save', function(next) {
   return next();
 });
 
-UserSchema.methods.comparePassword = function(plaintext, callback) {
-  return callback(null, bcrypt.compareSync(plaintext, this.password));
+UserSchema.methods.comparePassword = async function(plaintext) {
+  const match = await bcrypt.compare(plaintext, this.password);
+  return match;
 };
 
 export default mongoose.model('User', UserSchema);
