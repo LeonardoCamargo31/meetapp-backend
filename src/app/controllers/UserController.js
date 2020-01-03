@@ -18,11 +18,9 @@ class UserController {
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'validation error' });
     }
-
-    const { name, email, password } = req.body;
-    const user = new User({ name, email, password });
-    const resp = await user.save();
-    return res.status(200).json(resp);
+    const user = new User(req.body);
+    const { name, email } = await user.save();
+    return res.status(200).json({ name, email });
   }
 }
 export default new UserController();

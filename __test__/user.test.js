@@ -42,7 +42,6 @@ describe('User', () => {
         .then(res => {
           expect(res.body.name).to.equal('Felipe Smith');
           expect(res.body.email).to.equal('teste@teste.com');
-          expect(res.body.password).to.equal('123456');
           done();
         })
         .catch(err => done(err));

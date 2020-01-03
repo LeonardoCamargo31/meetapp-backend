@@ -6,15 +6,15 @@
   "scripts": {
     "lint": "eslint . --fix",
     "dev": "nodemon src/server.js",
-    "test:coverage": "nyc mocha --require sucrase/register --recursive --exit __test__/*.test.js",
-    "pre-commit": "npm run lint && npm run test:coverage"
+    "test": "nyc mocha --require sucrase/register --recursive --exit __test__/*.test.js"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint && test:coverage"
+      "pre-commit": "npm run lint && npm run test"
     }
   },
   "nyc": {
+    "temp-directory": "./coverage/.nyc_output",
     "reporter": [
       "text",
       "html"
@@ -30,6 +30,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "mongoose": "^5.8.0",
     "sucrase": "^3.10.1",
