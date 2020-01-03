@@ -13,7 +13,7 @@ class SessionController {
       password: Yup.string().required(),
     });
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Erro na validação' });
+      return res.status(400).json({ error: 'validation error' });
     }
 
     const { email, password } = req.body;
@@ -21,11 +21,11 @@ class SessionController {
     const user = await User.findOne({ email });
     if (!user) {
       // 401 não autorizado
-      return res.status(401).json({ error: 'User not found' });
+      return res.status(401).json({ error: 'user not found' });
     }
     // checar se a senha é válida
     if (!(await user.comparePassword(password))) {
-      return res.status(401).json({ error: 'Password does not match' });
+      return res.status(401).json({ error: 'password does not match' });
     }
     const { id, name } = user;
     return res.json({

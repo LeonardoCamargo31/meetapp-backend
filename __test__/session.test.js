@@ -72,7 +72,7 @@ describe('Session', () => {
         })
         .expect(401)
         .then(res => {
-          expect(res.body.error).to.equal('Password does not match');
+          expect(res.body.error).to.equal('password does not match');
           done();
         })
         .catch(err => done(err));
@@ -86,7 +86,20 @@ describe('Session', () => {
         })
         .expect(401)
         .then(res => {
-          expect(res.body.error).to.equal('User not found');
+          expect(res.body.error).to.equal('user not found');
+          done();
+        })
+        .catch(err => done(err));
+    });
+    it('Deve dar erro ao não enviar e-mail', done => {
+      request(app)
+        .post('/session')
+        .send({
+          password: '1234567',
+        })
+        .expect(400)
+        .then(res => {
+          expect(res.body.error).to.equal('validation error');
           done();
         })
         .catch(err => done(err));
