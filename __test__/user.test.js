@@ -62,6 +62,23 @@ describe('User', () => {
     });
   });
 
+  describe('Update', () => {
+    it('Deve atualizar senha do usuário', done => {
+      request(app)
+        .post('/user')
+        .send({
+          name: 'Felipe Smith',
+          password: '123456',
+        })
+        .expect(400)
+        .then(res => {
+          expect(res.body.error).to.equal('validation error');
+          done();
+        })
+        .catch(err => done(err));
+    });
+  });
+
   after('Limpar registros do banco de dados de teste', done => {
     mongoose.connection.db.dropDatabase(() => {
       mongoose.connection.close(() => {

@@ -41,7 +41,17 @@ class UserController {
       return res.status(400).json({ error: 'validation error' });
     }
 
-    return res.status(200).json({ title: 'validation success' });
+    const { oldPassword } = req.body;
+    const user = await User.findByPk(req.userId);
+
+    // se ele estiver atualizando a senha, comparo se a senha antiga esta correta
+    if (oldPassword && !(await user.checkPassword(oldPassword))) {
+      return res.status(401).json({ error: 'password does not match' });
+    }
+
+    await user.update(req.body);
+
+    return res.status(200).json({ title: 'password updated successfully' });
   }
 }
 export default new UserController();
